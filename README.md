@@ -14,21 +14,21 @@ for 24 hours" bounty. It speaks the agent-fun/bars-replay/v1 protocol
 Long-only trend following on 1-minute closes:
 
 - **Trend**: a fast and a slow integer EMA; the bot only considers buying
-while the fast EMA sits above the slow EMA, and sells on the cross back.
+while the fast EMA sits above the slow EMA, and sells on the cross back. 
 - **Momentum gate**: the trailing 30-bar return must clear a threshold that
-is the larger of a fixed floor and a multiple of the recent mean absolute
-bar move, the last 10 bars must carry an impulse of their own, the fast
-EMA must clear the slow EMA by a real margin, and the last hour's range
-must span at least 1.00% — sideways chop, where a round trip costs ~26 bps
-in fees, slippage and price impact, is left alone.
+is the larger of a fixed floor and a multiple of the recent mean absolute 
+bar move, the last 10 bars must carry an impulse of their own, the fast 
+EMA must clear the slow EMA by a real margin, and the last hour's range 
+must span at least 1.00% — sideways chop, where a round trip costs ~26 bps 
+in fees, slippage and price impact, is left alone. 
 - **Sizing**: each entry spends 100% of equity. Entries are rare (the
-gates above pass only a handful of times a day), so each one is taken at
-full size; the fill's price impact is already counted in the replay.
+gates above pass only a handful of times a day), so each one is taken at 
+full size; the fill's price impact is already counted in the replay. 
 - **Exits**: a trailing stop that arms at +2.00% and fires after a 1.10%
-give-back from the peak, stop-loss at −0.90%, or the EMA trend break,
-whichever comes first. There is no fixed take-profit: a strong trend is
-ridden until it gives out. A 60-bar cooldown after every exit keeps the
-bot from churning in chop.
+give-back from the peak, stop-loss at −0.90%, or the EMA trend break, 
+whichever comes first. There is no fixed take-profit: a strong trend is 
+ridden until it gives out. A 60-bar cooldown after every exit keeps the 
+bot from churning in chop. 
 
 All arithmetic is integer (BigInt) on the wire's raw units. The bot reads
 no clock, no environment and no randomness, so two runs on the same bars
